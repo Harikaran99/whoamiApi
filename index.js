@@ -27,10 +27,11 @@ app.get('/api/hello', function (req, res) {
 
 //My Api Implentation
 app.get("/api/whoami", (req, res) => {
+  console.log(req)
   res.json({
-    ipaddress: ip.address(),
-    language: req.rawHeaders[31],
-    software: req.rawHeaders[15]
+    ipaddress: req.get("X-Forwarded-For"),
+    language: req.get("accept-language"),
+    software: req.get("user-agent")
   })
 })
 
